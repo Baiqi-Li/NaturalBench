@@ -11,13 +11,15 @@ def extract_answer(output_string, task_type="yes_no"):
     Extracts the answer from the output string based on the task type.
 
     Parameters:
-    output_string (str): The string containing the output.
+    output_string (str): The output string.
     task_type (str): The type of task. Must be either "yes_no" or "multiple_choice".
 
     Returns:
-    int: 1 if "yes" or "A" appears first, 0 if "no" or "B" appears first, depending on task_type.
-         -1 if no relevant answer is found.
-         Raises a ValueError if an unsupported task_type is provided.
+    int: 
+        1 if "yes" or "A" 
+        0 if "no" or "B"
+        -1 if no relevant answer is found.
+        Raises a ValueError if an unsupported task_type is provided.
     """
 
     def find_word_position(string, word):
@@ -55,10 +57,10 @@ def get_scores(scores):
             - list: [[q0_i0 (1 or 0), q0_i1 (1 or 0), q1_i0 (1 or 0), q1_i1 (1 or 0)], ...]
 
     The keys "q0_i0", "q0_i1", "q1_i0", "q1_i1" represent combinations of questions and images:
-        - "q0_i0" means question_0 and image_0 combination
-        - "q0_i1" means question_0 and image_1 combination
-        - "q1_i0" means question_1 and image_0 combination
-        - "q1_i1" means question_1 and image_1 combination
+        - "q0_i0" means question_0 on image_0 
+        - "q0_i1" means question_0 on image_1 
+        - "q1_i0" means question_1 on image_0 
+        - "q1_i1" means question_1 on image_1 
 
     Returns:
         dict: A dictionary containing the calculated scores:
