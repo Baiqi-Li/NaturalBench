@@ -155,22 +155,23 @@ if __name__ == "__main__":
     #2.Use NaturalBench: construct 1900*4 [question, image, correct_answer] samples from the dataset with 1900 samples
     naturalbench = []
     for item in dataset["train"]:
-        naturalbench.append([item["Question_0"] + SUFFIX_FOR_VQA[item["Question Type"]], item["Image_0"], item["Image_0_Question_0"]])
-        naturalbench.append([item["Question_0"] + SUFFIX_FOR_VQA[item["Question Type"]], item["Image_1"], item["Image_1_Question_0"]])
-        naturalbench.append([item["Question_1"] + SUFFIX_FOR_VQA[item["Question Type"]], item["Image_0"], item["Image_0_Question_1"]])
-        naturalbench.append([item["Question_1"] + SUFFIX_FOR_VQA[item["Question Type"]], item["Image_1"], item["Image_1_Question_1"]])
+        naturalbench.append([item["Question_0"] + SUFFIX_FOR_VQA[item["Question_Type"]], item["Image_0"], item["Image_0_Question_0"], item['Question_Type']])
+        naturalbench.append([item["Question_0"] + SUFFIX_FOR_VQA[item["Question_Type"]], item["Image_1"], item["Image_1_Question_0"], item['Question_Type']])
+        naturalbench.append([item["Question_1"] + SUFFIX_FOR_VQA[item["Question_Type"]], item["Image_0"], item["Image_0_Question_1"], item['Question_Type']])
+        naturalbench.append([item["Question_1"] + SUFFIX_FOR_VQA[item["Question_Type"]], item["Image_1"], item["Image_1_Question_1"], item['Question_Type']])
     
     # 3. Test Models: use the naturalbench dataset to test your own models and get the "output_file" of your model
     
     # 4. Extract the answer: extract the answer from the outputs (you could also use LLMs such as ChatGPT to extract the answer)
+    assert len(output_file) == 1900*4
     answers = {}
     number_answered_samples = len(output_file)//4
     for i in range(number_answered_samples):
         answers[i] = {
-            "q0_i0": extract_answer(output_file[i*4]),
-            "q0_i1": extract_answer(output_file[i*4+1]),
-            "q1_i0": extract_answer(output_file[i*4+2]),
-            "q1_i1": extract_answer(output_file[i*4+3])
+            "q0_i0": extract_answer(output_file[i*4], naturalbench[i*4][3]),
+            "q0_i1": extract_answer(output_file[i*4+1], naturalbench[i*4+1][3]),
+            "q1_i0": extract_answer(output_file[i*4+2], naturalbench[i*4+2][3]),
+            "q1_i1": extract_answer(output_file[i*4+3], naturalbench[i*4+3][3])
         }
 
     #5. Calculate the scores
