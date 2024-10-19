@@ -8,7 +8,7 @@
 
 </div>
 
-<div style="text-align: center;">
+<div align="center">
   <img src="https://huggingface.co/datasets/BaiqiL/NaturalBench/resolve/main/pictures/natural_teaser.jpg" style="width: 80%; height: auto;">
 </div>
 
