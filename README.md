@@ -8,6 +8,10 @@
 
 </div>
 
+<div style="text-align: center;">
+  <img src="https://huggingface.co/datasets/BaiqiL/NaturalBench/resolve/main/pictures/natural_teaser.jpg" style="width: 80%; height: auto;">
+</div>
+
 
 ## 🚩 **News**
 - :soon: We are going to integrate NaturalBench into [lmms-eval](https://github.com/EvolvingLMMs-Lab/lmms-eval).
