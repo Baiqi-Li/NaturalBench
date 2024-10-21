@@ -26,5 +26,11 @@ You can learn how to use and evaluate NaturalBench by reviewing the simple examp
 ## Citation Information
 
 ```
-
+@inproceedings{naturalbench,
+title={NaturalBench: Evaluating Vision-Language Models on Natural Adversarial Samples},
+author={Li, Baiqi and Lin, Zhiqiu and Peng, Wenxuan and Nyandwi, Jean de Dieu and Jiang, Daniel and Ma, Zixian and Khanuja, Simran and Krishna, Ranjay and Neubig, Graham and Ramanan, Deva},
+booktitle={The Thirty-eight Conference on Neural Information Processing Systems Datasets and Benchmarks Track},
+year={2024},
+url={https://openreview.net/forum?id=Dx88A9Zgnv}
+}
 ```
