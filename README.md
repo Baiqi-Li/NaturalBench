@@ -4,7 +4,7 @@
 
 <div align="center">
 
-| [🏠**Home Page**](https://linzhiqiu.github.io/papers/naturalbench) | [&#129303;**HuggingFace**](https://huggingface.co/datasets/BaiqiL/NaturalBench) | [**🏆Leaderboard**](https://huggingface.co/datasets/BaiqiL/NaturalBench#Leaderboard) | [**📖Paper**](https://openreview.net/forum?id=Dx88A9Zgnv&noteId=Dx88A9Zgnv) | [🖥️ **Code**](https://github.com/Baiqi-Li/NaturalBench/blob/main/example.py) |
+| [🏠**Home Page**](https://linzhiqiu.github.io/papers/naturalbench) | [&#129303;**HuggingFace**](https://huggingface.co/datasets/BaiqiL/NaturalBench) | [**🏆Leaderboard**](https://huggingface.co/datasets/BaiqiL/NaturalBench#Leaderboard) | [**📖Paper**](https://arxiv.org/abs/2410.14669) | [🖥️ **Code**](https://github.com/Baiqi-Li/NaturalBench/blob/main/example.py) |
 
 </div>
 
