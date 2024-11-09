@@ -14,8 +14,7 @@
 
 
 ## 🚩 **News**
-- :soon: We are going to integrate NaturalBench into [VLMEvalKit](https://github.com/open-compass/VLMEvalKit).
-- ✅ We have integrated NaturalBench into [lmms-eval](https://github.com/EvolvingLMMs-Lab/lmms-eval).
+- ✅ We have integrated NaturalBench into [lmms-eval](https://github.com/EvolvingLMMs-Lab/lmms-eval) and [VLMEvalKit](https://github.com/open-compass/VLMEvalKit).
 - 🎉 Sep. 26, 2024.  NaturalBench was accepted by ***NeurIPS***!
 
 
