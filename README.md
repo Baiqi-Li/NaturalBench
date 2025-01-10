@@ -33,7 +33,7 @@
           --log_samples_suffix llava_onevision_naturalbench \
           --output_path ./logs/
 
-  ## VLMEvalKit
+  ## VLMEvalKit:
       python run.py --data NaturalBenchDataset --model llava-onevision-qwen2-7b-ov-hf --verbose
   ```
   
