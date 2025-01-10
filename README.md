@@ -16,6 +16,25 @@
 ## 🚩 **News**
 - ✅ NaturalBench-Retrieval Dataset: the [download link](https://huggingface.co/datasets/BaiqiL/NaturalBench/resolve/main/NaturalBench-Retrieval.zip?download=true) from [huggingface homepage](https://huggingface.co/datasets/BaiqiL/NaturalBench).
 - ✅ We have integrated NaturalBench into [lmms-eval](https://github.com/EvolvingLMMs-Lab/lmms-eval) and [VLMEvalKit](https://github.com/open-compass/VLMEvalKit).
+  ```
+  # Evaluation with lmms-eval and VLMEvalKit
+  ## Please refer to the official documentation of lmms-eval and VLMEvalKit
+
+  ## lmms-eval:
+      python3 -m accelerate.commands.launch \
+          --num_processes=1 \
+          -m lmms_eval \
+          --model llava_onevision \
+          --model_args pretrained="lmms-lab/llava-onevision-qwen2-7b-ov" \
+          --tasks naturalbench \
+          --batch_size 1 \
+          --log_samples \
+          --log_samples_suffix llava_onevision_naturalbench \
+          --output_path ./logs/
+
+  ## VLMEvalKit
+      python run.py --data NaturalBenchDataset --model llava-onevision-qwen2-7b-ov-hf --verbose
+  ```
 - 🎉 Sep. 26, 2024.  NaturalBench was accepted by ***NeurIPS***!
 
 
