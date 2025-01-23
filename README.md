@@ -13,15 +13,29 @@
 </div>
 
 
-## 🚩 **News**
+## 🚩 News
 - 🎉 Sep. 26, 2024.  NaturalBench was accepted by ***NeurIPS***!
-- ✅ NaturalBench-Retrieval Dataset: the [download link](https://huggingface.co/datasets/BaiqiL/NaturalBench/resolve/main/NaturalBench-Retrieval.zip?download=true) from [huggingface homepage](https://huggingface.co/datasets/BaiqiL/NaturalBench).
 - ✅ We have integrated NaturalBench into [lmms-eval](https://github.com/EvolvingLMMs-Lab/lmms-eval) and [VLMEvalKit](https://github.com/open-compass/VLMEvalKit).
-  ```
-  # Evaluation with lmms-eval and VLMEvalKit
-  ## Please refer to the official documentation of lmms-eval and VLMEvalKit
+- ✅ We have integrated NaturalBench-Retrieval Dataset into [t2v_metric](https://github.com/linzhiqiu/t2v_metrics/tree/main).
+- ✅ NaturalBench-Retrieval Dataset: the [download link](https://huggingface.co/datasets/BaiqiL/NaturalBench/resolve/main/NaturalBench-Retrieval.zip?download=true) from [huggingface homepage](https://huggingface.co/datasets/BaiqiL/NaturalBench).
 
-  ## lmms-eval:
+## Usages
+
+- ### VQA Task
+
+  There are two approaches to use and evaluate NaturalBench:
+
+    #### 1. Evaluation with lmms-eval and VLMEvalKit
+
+  Learn how to use and evaluate NaturalBench by reviewing the simple example in [naturalbench_vqa.py](https://github.com/Baiqi-Li/NaturalBench/blob/main/naturalbench_vqa.py).
+
+
+    #### 2. Evaluation with `lmms-eval` and `VLMEvalKit`
+
+    Please refer to the official documentation of `lmms-eval` and `VLMEvalKit` for more details.
+
+    - **lmms-eval**:
+      ```bash
       python3 -m accelerate.commands.launch \
           --num_processes=1 \
           -m lmms_eval \
@@ -32,13 +46,21 @@
           --log_samples \
           --log_samples_suffix llava_onevision_naturalbench \
           --output_path ./logs/
+      ```
 
-  ## VLMEvalKit:
-      python run.py --data NaturalBenchDataset --model llava-onevision-qwen2-7b-ov-hf --verbose
+  - **VLMEvalKit**:
+    ```bash
+    python run.py --data NaturalBenchDataset --model llava-onevision-qwen2-7b-ov-hf --verbose
+    ```
+
+- ### Retrieval Task
+
+  To use the retrieval task, install [t2v_metric](https://github.com/linzhiqiu/t2v_metrics/tree/main) package, then run the evaluation code:
+
   ```
-  
-## Usages
-You can learn how to use and evaluate NaturalBench by reviewing the simple examples in [example.py](https://github.com/Baiqi-Li/NaturalBench/blob/main/example.py).
+  python naturalbench_retrieval.py
+  ```
+
 
 ## Citation Information
 ```
