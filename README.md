@@ -23,14 +23,14 @@
 
 - ### VQA Task
 
-  There are two approaches to use and evaluate NaturalBench:
+  There are two approaches to use and evaluate NaturalBench benchmark:
 
-    #### 1. Evaluation with lmms-eval and VLMEvalKit
+    #### 1. Evaluation based on the example code: 
 
   Learn how to use and evaluate NaturalBench by reviewing the simple example in [naturalbench_vqa.py](https://github.com/Baiqi-Li/NaturalBench/blob/main/naturalbench_vqa.py).
 
 
-    #### 2. Evaluation with `lmms-eval` and `VLMEvalKit`
+    #### 2. Evaluation with `lmms-eval` and `VLMEvalKit`:
 
     Please refer to the official documentation of `lmms-eval` and `VLMEvalKit` for more details.
 
