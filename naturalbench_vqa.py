@@ -160,7 +160,7 @@ if __name__ == "__main__":
         naturalbench.append([item["Question_1"] + SUFFIX_FOR_VQA[item["Question_Type"]], item["Image_0"], item["Image_0_Question_1"], item['Question_Type']])
         naturalbench.append([item["Question_1"] + SUFFIX_FOR_VQA[item["Question_Type"]], item["Image_1"], item["Image_1_Question_1"], item['Question_Type']])
     
-    # 3. Test Models: use the naturalbench dataset to test your own models and get the "output_file" of your model
+    # 3. Test Models: use the naturalbench dataset to test your own models and get the "model output"(string) into "output_file"(list)
     
     # 4. Extract the answer: extract the answer from the outputs (you could also use LLMs such as ChatGPT to extract the answer)
     assert len(output_file) == 1900*4
