@@ -1,10 +1,7 @@
 import re
-from datasets import load_dataset
-
-SUFFIX_FOR_VQA = {
-    "yes_no": "Please answer Yes or No.",
-    "multiple_choice": "Please output the letter corresponding to the correct option."
-} 
+import os
+import zipfile
+import json
 
 def extract_answer(output_string, task_type="yes_no"):
     """
@@ -145,35 +142,76 @@ def get_scores(scores):
         'Acc': Acc / float(num_samples * 4),
         'G_Acc': G_Acc / num_samples
     }
-    
+
     return results
 
-if __name__ == "__main__":
-    #1.Load dataset from HuggingFace
-    dataset = load_dataset("BaiqiL/NaturalBench")
 
-    #2.Use NaturalBench: construct 1900*4 [question, image, correct_answer, question_type] samples from the dataset with 1900 samples
-    naturalbench = []
-    for item in dataset["train"]:
-        naturalbench.append([item["Question_0"] + SUFFIX_FOR_VQA[item["Question_Type"]], item["Image_0"], item["Image_0_Question_0"], item['Question_Type']])
-        naturalbench.append([item["Question_0"] + SUFFIX_FOR_VQA[item["Question_Type"]], item["Image_1"], item["Image_1_Question_0"], item['Question_Type']])
-        naturalbench.append([item["Question_1"] + SUFFIX_FOR_VQA[item["Question_Type"]], item["Image_0"], item["Image_0_Question_1"], item['Question_Type']])
-        naturalbench.append([item["Question_1"] + SUFFIX_FOR_VQA[item["Question_Type"]], item["Image_1"], item["Image_1_Question_1"], item['Question_Type']])
+def ensure_images_directory():
+    # Get the current script's directory
+    current_directory = os.path.dirname(os.path.abspath(__file__))
     
-    # 3. Test Models: use the naturalbench dataset to test your own models and get the "model output"(string) into "output_file"(list)
+    # Define the path to the images folder
+    images_folder_path = os.path.join(current_directory, 'images')
     
-    # 4. Extract the answer: extract the answer from the outputs (you could also use LLMs such as ChatGPT to extract the answer)
-    assert len(output_file) == 1900*4
+    # Create the images folder if it doesn't exist
+    if not os.path.exists(images_folder_path):
+        print("The images folder does not exist. Creating it...")
+        os.makedirs(images_folder_path)
+    
+    # Define the path to the images.zip file
+    zip_file_path = os.path.join(current_directory, 'images.zip')
+    
+    # Check if the images.zip file exists
+    if os.path.exists(zip_file_path):
+        print("Extracting images.zip into the images folder...")
+        # Extract the images.zip file into the images folder
+        with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+            zip_ref.extractall(images_folder_path)
+        print("Extraction completed.")
+    else:
+        print("The images.zip file does not exist. Cannot extract.")
+
+
+def read_json_file(file_path):
+    """
+    Read and return the content of a JSON file.
+
+    :param file_path: Path to the JSON file.
+    :return: Parsed JSON content as a Python dictionary.
+    """
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+            return data
+    except FileNotFoundError:
+        print(f"The file {file_path} does not exist.")
+    except json.JSONDecodeError:
+        print(f"Error decoding JSON from the file {file_path}.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+
+
+if __name__ == "__main__":
+
+    ensure_images_directory()
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    finetune_test_set = read_json_file(os.path.join(current_directory, 'test_set.json'))
+
+    # # 1. Test Models: use the finetune_test_set to test your own models and get the "model output"(string) into "output_file"(list)
+    
+    # # 2. Extract the answer: extract the answer from the outputs (you could also use LLMs such as ChatGPT to extract the answer)
+    assert len(output_file) == len(finetune_test_set)
     answers = {}
     number_answered_samples = len(output_file)//4
     for i in range(number_answered_samples):
         answers[i] = {
-            "q0_i0": extract_answer(output_file[i*4], naturalbench[i*4][3]),
-            "q0_i1": extract_answer(output_file[i*4+1], naturalbench[i*4+1][3]),
-            "q1_i0": extract_answer(output_file[i*4+2], naturalbench[i*4+2][3]),
-            "q1_i1": extract_answer(output_file[i*4+3], naturalbench[i*4+3][3])
+            "q0_i0": extract_answer(output_file[i*4], finetune_test_set[i*4][3]),
+            "q0_i1": extract_answer(output_file[i*4+1], finetune_test_set[i*4+1][3]),
+            "q1_i0": extract_answer(output_file[i*4+2], finetune_test_set[i*4+2][3]),
+            "q1_i1": extract_answer(output_file[i*4+3], finetune_test_set[i*4+3][3])
         }
 
-    #5. Calculate the scores
     scores = get_scores(answers)
     print(scores)
